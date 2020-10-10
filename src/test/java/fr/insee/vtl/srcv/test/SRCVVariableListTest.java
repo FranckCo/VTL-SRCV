@@ -1,5 +1,6 @@
 package fr.insee.vtl.srcv.test;
 
+import fr.insee.vtl.srcv.Configuration;
 import fr.insee.vtl.srcv.SRCVVariable;
 import fr.insee.vtl.srcv.SRCVVariableList;
 import org.apache.commons.io.FileUtils;
@@ -17,8 +18,7 @@ public class SRCVVariableListTest {
     @Test
     public void testFromTextInd() throws IOException {
 
-        String individualsTableFileName = "src/main/resources/data/Dictionnaire_codes_SRCV2015_Ind.txt";
-        String individualsTableText = FileUtils.readFileToString(new File(individualsTableFileName), "UTF-8");
+        String individualsTableText = FileUtils.readFileToString(new File(Configuration.SRCV_TXT_IND_TABLE), "UTF-8");
 
         SRCVVariableList variableList = SRCVVariableList.fromText(individualsTableText);
         Set<String> types = new HashSet<>();

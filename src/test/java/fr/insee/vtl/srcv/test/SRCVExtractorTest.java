@@ -1,5 +1,6 @@
 package fr.insee.vtl.srcv.test;
 
+import fr.insee.vtl.srcv.Configuration;
 import fr.insee.vtl.srcv.SRCVExtractor;
 import org.junit.jupiter.api.Test;
 
@@ -11,28 +12,28 @@ public class SRCVExtractorTest {
     @Test
     public void testExtractAll() throws IOException {
 
-        SRCVExtractor extractor = new SRCVExtractor(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.pdf"));
-        extractor.extractAllText(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.txt"));
+        SRCVExtractor extractor = new SRCVExtractor(new File(Configuration.SRCV_PDF_CODE_DICT));
+        extractor.extractAllText(new File(Configuration.SRCV_TXT_CODE_DICT));
     }
 
     @Test
     public void testExtractIndividualsTable() throws IOException {
 
-        SRCVExtractor extractor = new SRCVExtractor(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.pdf"));
-        extractor.extractSectionText(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015_Ind.txt"),113, 174);
+        SRCVExtractor extractor = new SRCVExtractor(new File(Configuration.SRCV_PDF_CODE_DICT));
+        extractor.extractSectionText(new File(Configuration.SRCV_TXT_IND_TABLE),113, 174);
     }
 
     @Test
     public void testExtractHouseholdsTable() throws IOException {
 
-        SRCVExtractor extractor = new SRCVExtractor(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.pdf"));
-        extractor.extractSectionText(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015_Hou.txt"),45, 109);
+        SRCVExtractor extractor = new SRCVExtractor(new File(Configuration.SRCV_PDF_CODE_DICT));
+        extractor.extractSectionText(new File(Configuration.SRCV_TXT_HOU_TABLE),45, 109);
     }
 
     @Test
     public void testExtractAllStruct() throws IOException {
 
-        SRCVExtractor extractor = new SRCVExtractor(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.pdf"));
-        extractor.extractAllTextStruct(new File("src/main/resources/data/Dictionnaire_codes_SRCV2015.txt"));
+        SRCVExtractor extractor = new SRCVExtractor(new File(Configuration.SRCV_PDF_CODE_DICT));
+        extractor.extractAllTextStruct(new File(Configuration.SRCV_TXT_CODE_DICT));
     }
 }

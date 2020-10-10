@@ -50,7 +50,6 @@ public class SRCVExtractor {
 		}
 	}
 
-
 	public void extractAllTextStruct(File textFile) throws IOException {
 
 		try (Writer textWriter = new BufferedWriter(new FileWriter(textFile))) {

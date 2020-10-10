@@ -1,5 +1,6 @@
 package fr.insee.vtl.srcv.test;
 
+import fr.insee.vtl.srcv.Configuration;
 import fr.insee.vtl.srcv.DataManager;
 import org.junit.jupiter.api.Test;
 
@@ -12,14 +13,14 @@ public class DataManagerTest {
     @Test
     public void testReadFile() throws IOException {
 
-        DataManager csvReader = new DataManager(new File("src/main/resources/data/extrait_srcv.csv"));
+        DataManager csvReader = new DataManager(new File(Configuration.SRCV_CSV_FILE_NAME));
         csvReader.readFile();
     }
 
     @Test
     public void testGetHeaders() throws IOException {
 
-        DataManager csvReader = new DataManager(new File("src/main/resources/data/extrait_srcv.csv"));
+        DataManager csvReader = new DataManager(new File(Configuration.SRCV_CSV_FILE_NAME));
         System.out.println(csvReader.getHeaders());
         System.out.println(csvReader.getHeaders().stream().map(String::toUpperCase).collect(Collectors.toList()));
     }
