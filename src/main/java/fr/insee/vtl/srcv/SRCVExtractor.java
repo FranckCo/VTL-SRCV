@@ -62,29 +62,4 @@ public class SRCVExtractor {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-
-		String staticInFilePath = "src/main/resources/data/Dictionnaire_codes_SRCV2015.pdf";
-		String outFilePath = "src/main/resources/data/Dictionnaire_codes_SRCV2015.txt";
-
-		File pdfFile = new File(staticInFilePath);
-		try {
-			PDDocument document = PDDocument.load(pdfFile );
-			System.out.println(document.getNumberOfPages());
-
-			PDFTextStripper pdfStripper = new PDFTextStripper();
-			String text = pdfStripper.getText(document);
-
-			Files.write(Paths.get(outFilePath), text.getBytes());
-
-			document.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-
-	}
-
 }
