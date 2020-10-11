@@ -19,7 +19,6 @@ public class SRCVVariableListTest {
     public void testFromTextInd() throws IOException {
 
         String individualsTableText = FileUtils.readFileToString(new File(Configuration.SRCV_TXT_IND_TABLE), "UTF-8");
-
         SRCVVariableList variableList = SRCVVariableList.fromText(individualsTableText);
         Set<String> types = new HashSet<>();
         for (SRCVVariable variable : variableList.getVariables().values()) {

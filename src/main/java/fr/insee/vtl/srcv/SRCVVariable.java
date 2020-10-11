@@ -3,6 +3,7 @@ package fr.insee.vtl.srcv;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -15,6 +16,8 @@ public class SRCVVariable {
     /** Log4J2 logger */
     public static Logger logger = LogManager.getLogger();
 
+    /** Source text */
+    List<String> sourceLines;
     /** Variable code */
     String identifier = null;
     /** Variable type */
@@ -22,15 +25,15 @@ public class SRCVVariable {
     /** Variable description */
     String description = null;
     /** Code list */
-    SortedMap<String, String> codeList = null;
+    SortedMap<String, String> codeList;
     /** Variable domain */
     String domain = null;
     /** Variable weight */
     String weight = null;
 
-
     public SRCVVariable() {
 
+        sourceLines = new ArrayList<>();
         codeList = new TreeMap<>();
     }
 
@@ -42,6 +45,8 @@ public class SRCVVariable {
     public static SRCVVariable fromLines(List<String> lines) {
 
         SRCVVariable variable = new SRCVVariable();
+        variable.sourceLines = new ArrayList<>(lines); // Make a copy ?
+
         String[] firstLine = lines.get(0).split(" ");
         variable.setIdentifier(firstLine[0].trim());
         variable.setType(firstLine[1].trim());
@@ -49,6 +54,8 @@ public class SRCVVariable {
 
         return variable;
     }
+
+    public List<String> getSourceLines() { return sourceLines; }
 
     public String getIdentifier() {
         return identifier;
@@ -90,9 +97,7 @@ public class SRCVVariable {
         this.domain = domain;
     }
 
-    public String getWeight() {
-        return weight;
-    }
+    public String getWeight() {  return weight; }
 
     public void setWeight(String weight) {
         this.weight = weight;
