@@ -3,10 +3,7 @@ package fr.insee.vtl.srcv;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Description of a SRCV variable.
@@ -53,6 +50,34 @@ public class SRCVVariable {
         logger.debug("Reading variable " + variable.getIdentifier() + " from " + lines.size() + " lines");
 
         return variable;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Variable SRCV ").append(identifier).append(" (type ").append(type).append(")\n");
+        builder.append("Source:\n").append(sourceLines);
+        return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SRCVVariable that = (SRCVVariable) o;
+        return sourceLines.equals(that.sourceLines) &&
+                identifier.equals(that.identifier) &&
+                type.equals(that.type) &&
+                description.equals(that.description) &&
+                Objects.equals(codeList, that.codeList) &&
+                domain.equals(that.domain) &&
+                weight.equals(that.weight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(identifier, type, description, codeList, domain, weight);
     }
 
     public List<String> getSourceLines() { return sourceLines; }

@@ -45,7 +45,7 @@ public class SRCVCheckerTest {
         if (matchingVariables.size() > 0) {
             System.out.println("List of variable descriptions which contain at least one line starting with a space:");
             for (SRCVVariable matchingVariable : matchingVariables) {
-                System.out.println(matchingVariable.getSourceLines());
+                System.out.println(matchingVariable);
             }
         }
     }
