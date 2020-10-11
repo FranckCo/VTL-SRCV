@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class SRCVChecker {
 
-
     /** Log4J2 logger */
     public static Logger logger = LogManager.getLogger();
 
@@ -60,14 +59,42 @@ public class SRCVChecker {
 
     /**
      * Checks if a variable description contains a line starting with a space.
+     *
      * @param variable The SRCV variable to check.
      * @return The list of lines in the variable description that start with a space.
      */
-    public static List<String> checksLineStartsWithSpace(SRCVVariable variable) {
+    public static List<String> checkLineStartsWithSpace(SRCVVariable variable) {
 
         List<String> startingWithSpace = new ArrayList<>();
         for (String line : variable.getSourceLines())  if (line.startsWith(" ")) startingWithSpace.add(line);
 
         return startingWithSpace;
+    }
+
+    /**
+     * Checks if a variable description does not end with a line describing the domain.
+     *
+     * @param variable The SRCV variable to check.
+     * @return The last description line if it does not describe the domain, null otherwise.
+     */
+    public static String checkDomainIsLast(SRCVVariable variable) {
+
+        List<String> sourceLines = variable.getSourceLines();
+        String lastSourceLine = sourceLines.get(sourceLines.size() - 1);
+
+        if (!lastSourceLine.startsWith("Champ : ")) return lastSourceLine;
+        return null;
+    }
+
+    /**
+     * Checks if a variable description contains an empty line.
+     *
+     * @param variable The SRCV variable to check.
+     * @return A boolean equal to true if the variable description contains an empty line and false otherwise.
+     */
+    public static boolean checkContainsEmptyLine(SRCVVariable variable) {
+
+        for (String line : variable.getSourceLines()) if (line.length() == 0) return true;
+        return false;
     }
 }

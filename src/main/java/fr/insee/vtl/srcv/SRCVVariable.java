@@ -42,7 +42,7 @@ public class SRCVVariable {
     public static SRCVVariable fromLines(List<String> lines) {
 
         SRCVVariable variable = new SRCVVariable();
-        variable.sourceLines = new ArrayList<>(lines); // Make a copy ?
+        variable.sourceLines = new ArrayList<>(lines);
 
         String[] firstLine = lines.get(0).split(" ");
         variable.setIdentifier(firstLine[0].trim());
@@ -57,7 +57,8 @@ public class SRCVVariable {
 
         StringBuilder builder = new StringBuilder();
         builder.append("Variable SRCV ").append(identifier).append(" (type ").append(type).append(")\n");
-        builder.append("Source:\n").append(sourceLines);
+        builder.append("Source:\n");
+        for (String sourceLine : sourceLines) builder.append(sourceLine).append("\n");
         return builder.toString();
     }
 

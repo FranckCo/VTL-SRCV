@@ -39,14 +39,47 @@ public class SRCVCheckerTest {
         SRCVVariableList variableList = SRCVVariableList.fromText(individualsTableText);
         List<SRCVVariable> matchingVariables = new ArrayList<>();
         for (SRCVVariable variable : variableList.getVariables().values()) {
-            if (SRCVChecker.checksLineStartsWithSpace(variable).size() > 0)  matchingVariables.add(variable);
+            if (SRCVChecker.checkLineStartsWithSpace(variable).size() > 0) matchingVariables.add(variable);
         }
 
         if (matchingVariables.size() > 0) {
             System.out.println("List of variable descriptions which contain at least one line starting with a space:");
-            for (SRCVVariable matchingVariable : matchingVariables) {
-                System.out.println(matchingVariable);
-            }
+            System.out.println("(" +  matchingVariables.size() + " cases)");
+            for (SRCVVariable matchingVariable : matchingVariables)  System.out.println(matchingVariable.toString());
+        }
+    }
+
+    @Test
+    public void testChecksDomainIsLast() throws IOException {
+
+        String individualsTableText = FileUtils.readFileToString(new File(Configuration.SRCV_TXT_IND_TABLE), "UTF-8");
+        SRCVVariableList variableList = SRCVVariableList.fromText(individualsTableText);
+        List<SRCVVariable> matchingVariables = new ArrayList<>();
+        for (SRCVVariable variable : variableList.getVariables().values()) {
+            if (SRCVChecker.checkDomainIsLast(variable) != null) matchingVariables.add(variable);
+        }
+
+        if (matchingVariables.size() > 0) {
+            System.out.println("List of variable descriptions for which last line is not domain description:");
+            System.out.println("(" +  matchingVariables.size() + " cases)");
+            for (SRCVVariable matchingVariable : matchingVariables) System.out.println(matchingVariable.toString());
+        }
+    }
+
+    @Test
+    public void testChecksContainsEmptyLine() throws IOException {
+
+        String individualsTableText = FileUtils.readFileToString(new File(Configuration.SRCV_TXT_IND_TABLE), "UTF-8");
+        SRCVVariableList variableList = SRCVVariableList.fromText(individualsTableText);
+        List<SRCVVariable> matchingVariables = new ArrayList<>();
+        for (SRCVVariable variable : variableList.getVariables().values()) {
+            if (SRCVChecker.checkContainsEmptyLine(variable)) matchingVariables.add(variable);
+        }
+
+        if (matchingVariables.size() > 0) {
+            System.out.println("List of variable descriptions which contain at least an empty line:");
+            System.out.println("(" +  matchingVariables.size() + " cases)");
+            for (SRCVVariable matchingVariable : matchingVariables) System.out.println(matchingVariable.toString());
         }
     }
 }
